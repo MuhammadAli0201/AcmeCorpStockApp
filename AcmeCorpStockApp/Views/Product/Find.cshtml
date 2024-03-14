@@ -1,0 +1,73 @@
+﻿@model ProductDTO;
+@{
+    ViewBag.title = "Find Product";
+}
+
+
+<h3 class="mt-5">Find Product</h3>
+<form class="mt-2" method="post" id="inputForm" asp-controller="product" name="form">
+    <div class="form-group row mt-2">
+        <label class="col-2 col-form-label">Id</label>
+        <div class="col-8">
+            <input class="form-control" name="id" type="text" asp-for="@Model.Id" />
+            <span class="text-danger" asp-validation-for="@Model.Id"></span>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+            <a class="btn btn-primary" type="button" name="reset" asp-controller="product" asp-action="find">Clear</a>
+        </div>
+    </div>
+    <div class="form-group row mt-2">
+        <label class="col-2 col-form-label">Name</label>
+        <div class="col-10">
+            <input class="form-control" name="name" type="text" asp-for="@Model.Name" readonly />
+            <span class="text-danger" asp-validation-for="@Model.Name"></span>
+        </div>
+    </div>
+    <div class="form-group row mt-2">
+        <label class="col-2 col-form-label">Quantity</label>
+        <div class="col-10">
+            <input class="form-control" min="0" name="quantity" type="number" asp-for="@Model.Quantity" readonly />
+            <span class="text-danger" asp-validation-for="@Model.Quantity"></span>
+        </div>
+    </div>
+    <div class="form-group row mt-2">
+        <label class="col-2 col-form-label">Price</label>
+        <div class="col-10">
+            <input class="form-control" min="0" name="price" type="number" step="0.00000001" asp-for="@Model.Price" readonly />
+            <span class="text-danger" asp-validation-for="@Model.Price"></span>
+        </div>
+    </div>
+    <div class="form-group row mt-2">
+        <label class="col-2 col-form-label">Manufactured</label>
+        <div class="col-10">
+            <input class="form-control" asp-format="{0:yyyy-MM-dd}" name="manufactured" type="date" asp-for="@Model.Manufactured" readonly />
+            <span class="text-danger" asp-validation-for="@Model.Manufactured"></span>
+        </div>
+    </div>
+    <div class="text-danger" asp-validation-summary="All">
+    </div>
+    <div class="d-flex flex-row justify-content-end">
+        <button class="btn btn-primary" type="submit" asp-controller="product" asp-action="Find">Find</button>
+        <button disabled type="submit" id="update" class="btn btn-success ml-2" asp-controller="product" asp-action="update">Update</button>
+        <a class="btn btn-light ml-2" asp-controller="home" asp-action="index">Cancel</a>
+    </div>
+</form>
+
+<script>
+    window.onload = function () {
+        enableDatafeilds();
+    }
+    function enableDatafeilds() {
+        let inputForm = document.getElementById("inputForm");
+        let inputFeilds = inputForm.getElementsByTagName('input');
+        let enableButton = true;
+        for (let i = 1; i < 5; i++) {
+            if (inputFeilds[i].value != "") {
+                inputFeilds[0].readOnly = true;
+                enableButton = false;
+                inputFeilds[i].readOnly = false;
+            }
+        }
+        document.getElementById("update").disabled = enableButton;
+    }
+</script>

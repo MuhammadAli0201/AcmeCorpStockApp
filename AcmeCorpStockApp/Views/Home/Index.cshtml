@@ -1,0 +1,37 @@
+﻿@model HomeIndexDTO;
+@{
+    ViewBag.title = "Home";
+}
+<div class="mt-2 d-flex justify-content-end">
+    <p>@Model.Email - @Model.Type</p>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex flex-column">
+            <h2 class="card-header mt-2 mb-5">
+                Achme Stock Application
+            </h2>
+            <a class="btn btn-success mt-2 text-white" asp-controller="product" asp-action="create">Create New Product</a>
+            <a class="btn btn-primary mt-2 text-white" asp-controller="product" asp-action="find">Find Product</a>
+            <a class="btn btn-warning mt-2 text-white" asp-controller="product" asp-action="update">Update Product</a>
+            <a class="btn btn-danger mt-2 text-white" asp-controller="product" asp-action="delete">Delete Product</a>
+            <form method="post" asp-controller="home" asp-action="logout">
+                <div class="d-flex flex-column">
+                    <button type="submit" class="btn btn-light mt-2">Exit</button>
+                </div>
+            </form>
+            <div class="card-footer mt-5">
+                <div class="mt-2 row">
+                    <a class="col-4" asp-controller="account" asp-action="changePassword">Change Password</a>
+                    @if (Model.Type == "Registrar")
+                    {
+                        <a class="col-4" asp-controller="account" asp-action="getUsers">List Users</a>
+                    }
+                    <a class="col-4" asp-controller="Home" asp-action="registrarOnly">Registrar only</a>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mr-5"><div class="text-danger" asp-validation-summary="All"></div></div>
+        </div>
+    </div>
+</div>
+

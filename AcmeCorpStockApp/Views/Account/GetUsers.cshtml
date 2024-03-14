@@ -1,0 +1,22 @@
+﻿@model List<ShowUserDTO>;
+@{
+    ViewBag.title = "Get Users";
+}
+
+<div class="mt-5">
+    <h3>Acme User List</h3>
+    <p>Here is the list of all wonderful users</p>
+
+    <div class="mt-2">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <p>@Model[i].Name - <span class="text-primary">@Model[i].Email</span> - @Model[i].Role</p>
+        }
+    </div>
+    
+    <div>
+        <a class="btn btn-light ml-5" asp-controller="home" asp-action="index">Close</a>
+        <a class="btn btn-primary" asp-controller="account" asp-action="AddUserByRegistrar">Add New User</a>
+    </div>
+
+</div>
